@@ -1,1 +1,38 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --bg: #0a0a0f;
+  --surface: rgb(255 255 255 / 0.045);
+  --surface-strong: rgb(255 255 255 / 0.07);
+  --border: rgb(255 255 255 / 0.1);
+  --text: #f4f3f7;
+  --text-dim: rgb(244 243 247 / 0.6);
+  --accent: #6c5ce7;
+
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+/* Shared across Home and Team's page headers — the one word of accent
+   colour in an otherwise monochrome heading. Global rather than duplicated
+   per component since it's purely a colour utility, not page-specific
+   layout. */
+.accent-text {
+  color: var(--accent);
+}

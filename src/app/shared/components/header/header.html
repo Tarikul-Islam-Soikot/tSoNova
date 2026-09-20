@@ -1,0 +1,20 @@
+<header class="nav">
+  <a class="nav__brand" routerLink="/">
+    <svg class="logo-mark" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
+      <defs>
+        <linearGradient id="logoGradient" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#8f80f7" />
+          <stop offset="1" stop-color="#5641d6" />
+        </linearGradient>
+      </defs>
+      <rect width="32" height="32" rx="9" fill="url(#logoGradient)" />
+      <path d="M10 9H22M16 9V18M16 18H21" fill="none" stroke="#fdfcff" stroke-width="2.6"
+            stroke-linecap="round" stroke-linejoin="round" />
+      <circle cx="22.5" cy="18" r="2.1" fill="#fdfcff" />
+    </svg>
+    <span>tSoNova</span>
+  </a>
+  <nav class="nav__links" aria-label="Primary">
+    <a routerLink="/team" routerLinkActive="is-active">Team</a>
+  </nav>
+</header>

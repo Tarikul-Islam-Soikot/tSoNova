@@ -1,0 +1,242 @@
+:host {
+  display: block;
+  flex: 1 0 auto;
+}
+
+/* Full-bleed two-column hero — fills the viewport below the nav instead of
+   a small centered column with empty margins either side. Visual on the
+   right is the other half of the same grid, matched in height to the copy
+   beside it via `align-items: center`. */
+.hero {
+  min-height: calc(100vh - 68px);
+  max-width: 1360px;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  align-items: center;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  padding: clamp(2.5rem, 6vh, 4rem) clamp(1.25rem, 6vw, 3rem);
+}
+
+.hero__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  max-width: 640px;
+}
+
+.hero__scope {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.hero__scope span {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+}
+
+.hero__scope span:first-child {
+  color: var(--accent);
+  border-color: rgb(108 92 231 / 0.45);
+}
+
+.hero__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 4.6vw, 4rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.hero__subtitle {
+  margin: 0;
+  max-width: 54ch;
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  line-height: 1.65;
+  color: var(--text-dim);
+}
+
+.hero__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.5rem;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.btn svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease;
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn--primary:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.btn--primary:hover svg {
+  transform: translateX(3px);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.hero__note {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--text-dim);
+}
+
+.hero__visual {
+  display: flex;
+  justify-content: center;
+}
+
+.app-frame {
+  width: 100%;
+  max-width: 440px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  backdrop-filter: blur(16px);
+  overflow: hidden;
+  box-shadow: 0 40px 70px -30px rgb(0 0 0 / 0.6);
+}
+
+.app-frame__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.app-frame__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-dim);
+  opacity: 0.35;
+}
+
+.app-frame__title {
+  margin-left: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-dim);
+}
+
+/* A CSS-only 8x8 checker pattern (the conic-gradient quadrant trick, tiled
+   at 25% so four tiles span the width = eight squares) rather than 64
+   hand-written cells — monochrome, so it reads as "board" without adding
+   another colour to the page. One highlighted square plus one accent-lit
+   piece is the only colour on it. */
+.board {
+  position: relative;
+  margin: 1.25rem;
+  aspect-ratio: 1;
+  border-radius: 14px;
+  overflow: hidden;
+  background-color: rgb(255 255 255 / 0.02);
+  background-image: repeating-conic-gradient(
+    var(--surface-strong) 0% 25%,
+    transparent 0% 50%
+  );
+  background-size: 25% 25%;
+}
+
+.board__highlight {
+  position: absolute;
+  top: 37.5%;
+  left: 37.5%;
+  width: 12.5%;
+  height: 12.5%;
+  border-radius: 3px;
+  background: rgb(108 92 231 / 0.55);
+  box-shadow: 0 0 26px rgb(108 92 231 / 0.55);
+}
+
+.board__rank {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 12.5%;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+}
+
+.board__piece {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1rem, 2.4vw, 1.5rem);
+  color: var(--text-dim);
+}
+
+.board__piece--active {
+  color: var(--accent);
+  filter: drop-shadow(0 0 10px rgb(108 92 231 / 0.7));
+}
+
+@media (max-width: 860px) {
+  .hero {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    padding-block: 2.5rem 3rem;
+  }
+
+  .hero__copy {
+    max-width: 640px;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero__title {
+    font-size: clamp(2rem, 9vw, 2.5rem);
+  }
+
+  .hero__scope span {
+    font-size: 0.7rem;
+    padding: 0.35rem 0.7rem;
+  }
+
+  .app-frame {
+    border-radius: 16px;
+  }
+
+  .board {
+    margin: 0.85rem;
+  }
+}
