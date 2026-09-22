@@ -6,6 +6,9 @@
 /out-tsc
 /bazel-out
 
+# Internal docs — not part of the published site
+/docs
+
 # Node
 /node_modules
 npm-debug.log
