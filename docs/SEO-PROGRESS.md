@@ -17,6 +17,33 @@ Production domain: `https://tsonova.com/`
 - **Phase 4 (Performance & Mobile): not started.**
 - **Phase 5 (Final SEO Verification): not started.**
 
+## Open follow-up (blocked on user, not a phase)
+
+- **Google Search Console verification for tSoNova: done.** The "HTML
+  file" method first failed. Then a mix-up: the user pasted the *same*
+  verification token already used for the separate `ChessMentor`
+  property — flagged before adding it, user asked to proceed anyway, and
+  it failed to verify as predicted (Google's tokens are bound to the
+  specific property they were issued for; having the right-looking meta
+  tag present isn't enough if it's the wrong token). Fixed by getting the
+  actual `tsonova.com`-specific token from Search Console and swapping it
+  in (`chore: add Google Search Console verification meta tag`, pushed
+  directly to `master`). Confirmed live via `curl` before the user
+  clicked Verify, then verified successfully. Unlike ChessMentor, no
+  redirect-stub complication here — `/` genuinely renders here, so the
+  bare-root property worked as expected.
+- `sitemap.xml` submitted and "Request Indexing" used on the key URL
+  (`/` for tSoNova, `/play` for ChessMentor) — **full Google Search
+  Console setup done for both sites.** From here it's just waiting on
+  Google's own crawl/index timeline (days to weeks for a brand-new
+  domain) — nothing else mechanically speeds this up. A real external
+  backlink was added via the user's GitHub bio, which helps.
+- **Bing Webmaster Tools: not started** for either site. Bing can import
+  directly from an already-verified Google Search Console account, which
+  may skip a second manual verification. Optional next step.
+- **Phase 3 (Content & On-Page SEO): not started** for either site.
+  Optional next step, bigger scope.
+
 ## Phase 1 — Audit & Understand (done)
 
 **What tSoNova actually is:** the parent company/studio site for the team
