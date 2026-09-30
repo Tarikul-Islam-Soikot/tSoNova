@@ -11,7 +11,7 @@ import { SeoService } from './core/seo/seo.service';
   templateUrl: './app.html',
 })
 export class App {
-  /** Field injection, not just DI registration — this is what actually
+  /** Field injection, not just DI registration - this is what actually
    * constructs the singleton `SeoService` (and its `Router.events`
    * subscription) as the app boots, so it's live before the first
    * navigation resolves. */
