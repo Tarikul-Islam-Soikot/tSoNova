@@ -29,7 +29,7 @@ export const routes: Routes = [
   },
   {
     path: 'team',
-    title: 'Team - tSoNova',
+    title: 'Our Team - tSoNova Software Studio',
     data: {
       seo: {
         description:
