@@ -38,9 +38,28 @@ Production domain: `https://tsonova.com/`
   Google's own crawl/index timeline (days to weeks for a brand-new
   domain) — nothing else mechanically speeds this up. A real external
   backlink was added via the user's GitHub bio, which helps.
-- **Bing Webmaster Tools: not started** for either site. Bing can import
-  directly from an already-verified Google Search Console account, which
-  may skip a second manual verification. Optional next step.
+- **Bing Webmaster Tools: verified, sitemap submitted, still not indexed
+  as of 2026-09-30 — root cause found and fixed.** Both `tsonova.com` and
+  `chessmentor.tsonova.com` verified via Bing's "Import from Google Search
+  Console" option, sitemaps submitted, indexing requested (see
+  ChessMentor's own `docs/SEO-PROGRESS.md` for the full verification
+  detail). Pages still weren't showing in Bing search. Investigated live
+  (curl as literal `bingbot`/`googlebot` user agents, `robots.txt`/
+  `sitemap.xml` fetched directly): both were fine and Bingbot wasn't
+  blocked — but `/team` 308-redirected to a trailing-slash version while
+  its own `<link rel="canonical">` pointed *back* at the pre-redirect,
+  non-serving URL (`/` doesn't have this problem — it already serves
+  directly, no redirect). Google tolerates that mismatch (it indexed
+  fine); Bing is documented to be stricter and can decline to index when
+  the signals conflict. **Fixed**: `SeoService.applySeo()` now builds
+  canonical/`og:url` from the actually-served trailing-slash path;
+  `public/sitemap.xml` updated to `/team/` to match.
+  - **IndexNow added** (`public/7f41530bb6324c0bd3bdd94ed73ad6d1.txt` +
+    `scripts/notify-indexnow.mjs`, run via `npm run notify:indexnow`) to
+    ping Bing for a near-immediate re-crawl after deploying, instead of
+    waiting on its own crawl schedule — run this once the fix is live.
+  - **Still open**: confirm in Bing Webmaster Tools' URL Inspection that
+    `/team` moves to "Indexed" after the IndexNow ping + next crawl.
 - **Phase 3 (Content & On-Page SEO): not started** for either site.
   Optional next step, bigger scope.
 
