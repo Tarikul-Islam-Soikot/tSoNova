@@ -50,7 +50,16 @@ export class SeoService {
   }
 
   private applySeo(data: SeoRouteData | null, title: string): void {
-    const url = `${SITE_URL}${this.router.url}`;
+    // Cloudflare Pages serves this app's prerendered output as
+    // directories (e.g. `/team/index.html`) and 308-redirects a bare
+    // `/team` request to `/team/`. A canonical/og:url pointing at the
+    // pre-redirect URL contradicts the redirect itself (a real signal
+    // Bing is stricter about honoring than Google, which tolerates it) —
+    // so this always points at the URL that actually serves 200. Same
+    // fix as ChessMentor's own `SeoService` (see that repo's
+    // `docs/SEO-PROGRESS.md`).
+    const path = this.router.url === '/' ? '/' : `${this.router.url.replace(/\/+$/, '')}/`;
+    const url = `${SITE_URL}${path}`;
     this.setCanonical(url);
 
     if (data) {
