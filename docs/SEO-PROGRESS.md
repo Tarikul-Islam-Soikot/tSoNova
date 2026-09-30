@@ -1,8 +1,8 @@
-# tSoNova — SEO Optimization Progress
+# tSoNova - SEO Optimization Progress
 
 Tracks the phase-wise SEO optimization work for this site, mirroring the
 same process already applied to `ChessMentor` (the sibling product this
-site links to) — see that repo's own `docs/SEO-PROGRESS.md` for the
+site links to) - see that repo's own `docs/SEO-PROGRESS.md` for the
 original 5-phase plan text, not repeated here. Read this file first when
 resuming SEO work on tSoNova. Keep it updated in place at the end of each
 phase (don't append a history log).
@@ -22,7 +22,7 @@ Production domain: `https://tsonova.com/`
 - **Google Search Console verification for tSoNova: done.** The "HTML
   file" method first failed. Then a mix-up: the user pasted the *same*
   verification token already used for the separate `ChessMentor`
-  property — flagged before adding it, user asked to proceed anyway, and
+  property - flagged before adding it, user asked to proceed anyway, and
   it failed to verify as predicted (Google's tokens are bound to the
   specific property they were issued for; having the right-looking meta
   tag present isn't enough if it's the wrong token). Fixed by getting the
@@ -30,25 +30,25 @@ Production domain: `https://tsonova.com/`
   in (`chore: add Google Search Console verification meta tag`, pushed
   directly to `master`). Confirmed live via `curl` before the user
   clicked Verify, then verified successfully. Unlike ChessMentor, no
-  redirect-stub complication here — `/` genuinely renders here, so the
+  redirect-stub complication here - `/` genuinely renders here, so the
   bare-root property worked as expected.
 - `sitemap.xml` submitted and "Request Indexing" used on the key URL
-  (`/` for tSoNova, `/play` for ChessMentor) — **full Google Search
+  (`/` for tSoNova, `/play` for ChessMentor) - **full Google Search
   Console setup done for both sites.** From here it's just waiting on
   Google's own crawl/index timeline (days to weeks for a brand-new
-  domain) — nothing else mechanically speeds this up. A real external
+  domain) - nothing else mechanically speeds this up. A real external
   backlink was added via the user's GitHub bio, which helps.
 - **Bing Webmaster Tools: verified, sitemap submitted, still not indexed
-  as of 2026-09-30 — root cause found and fixed.** Both `tsonova.com` and
+  as of 2026-09-30 - root cause found and fixed.** Both `tsonova.com` and
   `chessmentor.tsonova.com` verified via Bing's "Import from Google Search
   Console" option, sitemaps submitted, indexing requested (see
   ChessMentor's own `docs/SEO-PROGRESS.md` for the full verification
   detail). Pages still weren't showing in Bing search. Investigated live
   (curl as literal `bingbot`/`googlebot` user agents, `robots.txt`/
   `sitemap.xml` fetched directly): both were fine and Bingbot wasn't
-  blocked — but `/team` 308-redirected to a trailing-slash version while
+  blocked - but `/team` 308-redirected to a trailing-slash version while
   its own `<link rel="canonical">` pointed *back* at the pre-redirect,
-  non-serving URL (`/` doesn't have this problem — it already serves
+  non-serving URL (`/` doesn't have this problem - it already serves
   directly, no redirect). Google tolerates that mismatch (it indexed
   fine); Bing is documented to be stricter and can decline to index when
   the signals conflict. **Fixed**: `SeoService.applySeo()` now builds
@@ -57,18 +57,18 @@ Production domain: `https://tsonova.com/`
   - **IndexNow added** (`public/7f41530bb6324c0bd3bdd94ed73ad6d1.txt` +
     `scripts/notify-indexnow.mjs`, run via `npm run notify:indexnow`) to
     ping Bing for a near-immediate re-crawl after deploying, instead of
-    waiting on its own crawl schedule — run this once the fix is live.
+    waiting on its own crawl schedule - run this once the fix is live.
   - **Still open**: confirm in Bing Webmaster Tools' URL Inspection that
     `/team` moves to "Indexed" after the IndexNow ping + next crawl.
 - **Phase 3 (Content & On-Page SEO): not started** for either site.
   Optional next step, bigger scope.
 
-## Phase 1 — Audit & Understand (done)
+## Phase 1 - Audit & Understand (done)
 
 **What tSoNova actually is:** the parent company/studio site for the team
-behind ChessMentor — a small team building "practical software for
+behind ChessMentor - a small team building "practical software for
 everyday life" across AI, microchip design and everyday utilities, free
-to use. Not itself a product — it's a marketing/about site with two pages:
+to use. Not itself a product - it's a marketing/about site with two pages:
 
 | Route | Content |
 |---|---|
@@ -82,7 +82,7 @@ to use. Not itself a product — it's a marketing/about site with two pages:
 Cloudflare Pages builds` in the git history confirms the target).
 
 **Much lower SSR risk than ChessMentor**: no Web Worker, no WASM, no
-`localStorage`/`sessionStorage` anywhere in `src/app` — `Footer` only
+`localStorage`/`sessionStorage` anywhere in `src/app` - `Footer` only
 uses `new Date().getFullYear()`, which is SSR-safe. No equivalent of
 ChessMentor's Stockfish-worker guard was needed here.
 
@@ -90,19 +90,19 @@ ChessMentor's Stockfish-worker guard was needed here.
 
 - `index.html` has a `<title>`/`<meta name="description">` already (better
   starting point than ChessMentor had), but it's **the same for every
-  route** — `/` and `/team` are indistinguishable to a crawler/scraper
+  route** - `/` and `/team` are indistinguishable to a crawler/scraper
   that doesn't run JS.
 - No canonical URL, no robots meta, no Open Graph, no Twitter Card, no
   JSON-LD anywhere.
 - No `robots.txt`, no `sitemap.xml`.
-- No SSR/prerendering — same non-JS-crawler/social-preview blind spot
+- No SSR/prerendering - same non-JS-crawler/social-preview blind spot
   ChessMentor had, for the same reason (see that repo's own Phase 2 notes
   on why prerendering was the fix, not just dynamic `Title`/`Meta` calls).
 
 ### Pages that should be indexed
 
-- `/` — the real landing page
-- `/team` — legitimate unique content
+- `/` - the real landing page
+- `/team` - legitimate unique content
 
 Both pages are worth indexing; there's no thin/duplicate/dead route here
 unlike ChessMentor's `/settings`/`/analyze`/`/learn`/`/openings`.
@@ -111,34 +111,34 @@ unlike ChessMentor's `/settings`/`/analyze`/`/learn`/`/openings`.
 
 tSoNova · tSoNova software studio · AI microchip design utilities startup
 · makers of ChessMentor · [team member names, for people searching by
-name] — this is a small studio/about site, not a page anyone searches for
+name] - this is a small studio/about site, not a page anyone searches for
 by generic product-category keywords; its real SEO value is being
 findable by its own name and as the "made by" link behind ChessMentor.
 
 ### Recommended SEO page structure
 
-- `/` — canonical, indexed, existing real `<h1>`, full meta/OG/Twitter/
+- `/` - canonical, indexed, existing real `<h1>`, full meta/OG/Twitter/
   JSON-LD (`Organization` schema fits well)
-- `/team` — canonical, indexed, existing real `<h1>`, its own meta/OG/
+- `/team` - canonical, indexed, existing real `<h1>`, its own meta/OG/
   Twitter
 
-## Phase 2 — Technical SEO (done)
+## Phase 2 - Technical SEO (done)
 
 Same architecture decision as ChessMentor (build-time prerendering, no
-Node server at runtime, deploys as static files to Cloudflare Pages) —
+Node server at runtime, deploys as static files to Cloudflare Pages) -
 applied directly here per the user's explicit "same way" instruction,
 not re-asked. Much simpler than ChessMentor's own Phase 2 since there's
 no Worker/WASM to guard against server-side execution.
 
 - **Added Angular SSR/prerendering infrastructure** (`ng add @angular/ssr`)
-  — no pre-existing dependency drift here (unlike ChessMentor, all
+  - no pre-existing dependency drift here (unlike ChessMentor, all
   `@angular/*` packages were already aligned on `22.1.7`), so this went in
   cleanly on the first try. `angular.json`'s `outputMode` set to
   **`"static"`** for the same reason as ChessMentor: every route is
   either prerendered or a redirect, no per-request dynamic SSR is needed.
   `app.routes.server.ts`'s default `path: '**'` → `RenderMode.Prerender`
   covers both routes.
-- **`src/app/core/seo/`** (new) — same `SeoService` design as
+- **`src/app/core/seo/`** (new) - same `SeoService` design as
   ChessMentor's (`SeoRouteData`: description/robots/jsonLd, driven off
   each route's `data.seo`, applied on `NavigationEnd`), including the
   same fix already learned from ChessMentor's own Phase 2: reads the
@@ -149,12 +149,12 @@ no Worker/WASM to guard against server-side execution.
   JSON-LD) and `/team`.
 - **`src/index.html`**: added static canonical/robots/OG/Twitter defaults
   matching `/`'s own content, as the pre-hydration baseline.
-- **`public/robots.txt`** (new) — `Allow: /` plus a `Sitemap:` pointer.
-- **`public/sitemap.xml`** (new) — both real routes, `/` (priority 1.0)
+- **`public/robots.txt`** (new) - `Allow: /` plus a `Sitemap:` pointer.
+- **`public/sitemap.xml`** (new) - both real routes, `/` (priority 1.0)
   and `/team` (priority 0.5).
 - **Verification**: `ng build`/`ng test`/`ng lint` all clean. Real-browser
   check against the actual prerendered+hydrated static build (not just
   `ng serve`), same method as ChessMentor's own Phase 2 verification.
 - **Known gap, same as ChessMentor**: no dedicated Open Graph/Twitter
-  preview image exists in the repo — social share previews will show no
+  preview image exists in the repo - social share previews will show no
   image until a real branded asset is provided.

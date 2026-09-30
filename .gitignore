@@ -6,7 +6,7 @@
 /out-tsc
 /bazel-out
 
-# Internal docs — not part of the published site
+# Internal docs - not part of the published site
 /docs
 
 # Node

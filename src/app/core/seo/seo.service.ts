@@ -9,12 +9,12 @@ const JSON_LD_ELEMENT_ID = 'seo-json-ld';
 
 /** Drives per-route description/canonical/robots/OG/Twitter/JSON-LD tags
  * off each route's `data.seo` (see `SeoRouteData`). Root-provided, single
- * instance for the app's lifetime — constructed once from `App`'s
+ * instance for the app's lifetime - constructed once from `App`'s
  * constructor so its `Router.events` subscription is live before the
  * first navigation resolves.
  *
  * Works identically during the build-time prerender pass and in a real
- * browser after hydration — same design as ChessMentor's own
+ * browser after hydration - same design as ChessMentor's own
  * `SeoService` (see that repo's `docs/SEO-PROGRESS.md` Phase 2 notes for
  * the og:title/twitter:title timing bug this already avoids by reading
  * the title off the route snapshot rather than `Title.getTitle()`). */
@@ -54,7 +54,7 @@ export class SeoService {
     // directories (e.g. `/team/index.html`) and 308-redirects a bare
     // `/team` request to `/team/`. A canonical/og:url pointing at the
     // pre-redirect URL contradicts the redirect itself (a real signal
-    // Bing is stricter about honoring than Google, which tolerates it) —
+    // Bing is stricter about honoring than Google, which tolerates it) -
     // so this always points at the URL that actually serves 200. Same
     // fix as ChessMentor's own `SeoService` (see that repo's
     // `docs/SEO-PROGRESS.md`).

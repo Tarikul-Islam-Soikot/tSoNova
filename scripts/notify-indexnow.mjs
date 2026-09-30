@@ -4,7 +4,7 @@
 // a change that should get re-indexed quickly:
 //   node scripts/notify-indexnow.mjs
 // Requires public/<key>.txt (the IndexNow key file) to already be live at
-// https://tsonova.com/<key>.txt — deploy before running this.
+// https://tsonova.com/<key>.txt - deploy before running this.
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
@@ -18,7 +18,7 @@ const sitemap = readFileSync(path.join(rootDir, 'public', 'sitemap.xml'), 'utf8'
 const urlList = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
 
 if (urlList.length === 0) {
-  console.error('No URLs found in public/sitemap.xml — nothing to submit.');
+  console.error('No URLs found in public/sitemap.xml - nothing to submit.');
   process.exit(1);
 }
 
