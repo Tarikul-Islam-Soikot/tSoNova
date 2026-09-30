@@ -4,8 +4,7 @@ import { SITE_URL } from './core/seo/seo.constants';
 
 const HOME_DESCRIPTION =
   'tSoNova builds practical software for everyday life - AI, microchip design and everyday ' +
-  'utilities, thoughtfully made, free to use, with nothing to buy and nothing to sign up for. ' +
-  'First up: ChessMentor.';
+  'utilities, free to use, nothing to sign up for. First up: ChessMentor.';
 
 const HOME_JSON_LD = {
   '@context': 'https://schema.org',
